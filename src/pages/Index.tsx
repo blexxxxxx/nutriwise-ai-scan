@@ -5,7 +5,7 @@ import NutritionCard from '@/components/scan/NutritionCard';
 import AddMealButton from '@/components/scan/AddMealButton';
 import { useToast } from '@/hooks/use-toast';
 
-// Simulate food recognition results
+// Simulazione del riconoscimento alimentare
 const mockFoodRecognition = (imageUrl: string): Promise<{
   name: string;
   category: string;
@@ -17,12 +17,12 @@ const mockFoodRecognition = (imageUrl: string): Promise<{
     fat: number;
   };
 }> => {
-  // In a real app, this would call an AI service API
+  // In un'app reale, chiamerebbe un'API di servizio AI
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
-        name: "Mandarin Orange",
-        category: "Fruit",
+        name: "Arancia Mandarino",
+        category: "Frutta",
         amount: "250g",
         calories: 187,
         nutrients: {
@@ -48,10 +48,14 @@ const Index = () => {
     try {
       const result = await mockFoodRecognition(imageUrl);
       setAnalyzedFood(result);
+      toast({
+        title: "Analisi completata",
+        description: `Abbiamo identificato ${result.name}`,
+      });
     } catch (error) {
       toast({
-        title: "Analysis failed",
-        description: "Could not analyze the food image. Please try again.",
+        title: "Analisi fallita",
+        description: "Impossibile analizzare l'immagine del cibo. Riprova.",
         variant: "destructive",
       });
     } finally {
@@ -62,13 +66,13 @@ const Index = () => {
   const handleAddMeal = () => {
     if (!analyzedFood) return;
 
-    // In a real app, this would save the meal to the user's history
+    // In un'app reale, salverebbe il pasto nella cronologia dell'utente
     toast({
-      title: "Meal added",
-      description: `Added ${analyzedFood.name} to your daily log`,
+      title: "Pasto aggiunto",
+      description: `${analyzedFood.name} aggiunto al tuo registro giornaliero`,
     });
 
-    // Reset the form
+    // Reset del form
     setSelectedImage(null);
     setAnalyzedFood(null);
   };
@@ -80,7 +84,7 @@ const Index = () => {
       
       {(analyzing || analyzedFood) && (
         <NutritionCard 
-          name={analyzing ? "Analyzing Food..." : analyzedFood.name}
+          name={analyzing ? "Analisi del cibo in corso..." : analyzedFood.name}
           category={analyzing ? undefined : analyzedFood.category}
           amount={analyzing ? undefined : analyzedFood.amount}
           calories={analyzing ? undefined : analyzedFood.calories}
