@@ -18,7 +18,7 @@ const Camera = ({ onImageSelected }: CameraProps) => {
 
     // Verifica il tipo e la dimensione del file
     if (!file.type.startsWith('image/')) {
-      setError('Per favore, seleziona un'immagine valida');
+      setError('Per favore, seleziona un\'immagine valida');
       return;
     }
 
