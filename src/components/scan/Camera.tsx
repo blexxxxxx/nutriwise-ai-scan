@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Plus } from 'lucide-react';
+import { Plus, Camera as CameraIcon } from 'lucide-react';
 
 interface CameraProps {
   onImageSelected: (image: string) => void;
@@ -33,7 +33,7 @@ const Camera = ({ onImageSelected }: CameraProps) => {
       ) : (
         <div className="text-center p-8">
           <div className="w-20 h-20 rounded-full bg-nutri-card flex items-center justify-center mx-auto mb-4 border border-zinc-700">
-            <Camera size={36} className="text-nutri-muted" />
+            <CameraIcon size={36} className="text-nutri-muted" />
           </div>
           <p className="text-nutri-muted">Upload or take a photo of your food</p>
         </div>
